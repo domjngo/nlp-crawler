@@ -26,12 +26,16 @@ def get_all_articles(url):
 def get_article(url):
     page = urlopen(url)
     soup = BeautifulSoup(page, 'html.parser')
-    article = soup.find('div', attrs={'class': 'content__article-body'}).text
-    return article
+    article = soup.find('div', attrs={'class': 'content__article-body'})
+    if article:
+        return article.text
+    else:
+        return '. '
 
 
 def summarize(text, n):
     sentences = sent_tokenize(text)
+    sentences = list(set(sentences))
 
     assert n <= len(sentences)
     words = word_tokenize(text.lower())
@@ -69,12 +73,25 @@ url = 'https://www.theguardian.com/commentisfree/2017/dec/04/panorama-syria-alle
 text = get_article(url)
 text = clean_text(text)
 
-summary = summarize(text, 2)
+summary = summarize(text, 1)
 
 print(summary)
 
 
-all_articles = get_all_articles('https://www.theguardian.com')
+all_articles = get_all_articles('https://www.theguardian.com/uk')
 
 print(all_articles)
+
+all_articles_text = ''
+for link in all_articles:
+    print(link)
+    if link != 'https://www.theguardian.com/sport/all':
+        article = get_article(link)
+        all_articles_text += article
+
+all_articles_text = clean_text(all_articles_text)
+
+articles_summary = summarize(all_articles_text, 3)
+
+print(articles_summary)
 
