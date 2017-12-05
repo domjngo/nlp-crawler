@@ -43,7 +43,7 @@ def summarize(text, n):
 
     assert n <= len(sentences)
     words = word_tokenize(text.lower())
-    _stopwords = set(stopwords.words('english')+list(punctuation)+my_stopwords)
+    _stopwords = set(stopwords.words('english') + list(punctuation) + my_stopwords)
 
     new_words = [word for word in words if word not in _stopwords]
     freq = FreqDist(new_words)
@@ -85,26 +85,25 @@ def get_guardian_summary(n):
 
 
 def get_api(cfg):
-  auth = tweepy.OAuthHandler(cfg['consumer_key'], cfg['consumer_secret'])
-  auth.set_access_token(cfg['access_token'], cfg['access_token_secret'])
-  return tweepy.API(auth)
+    auth = tweepy.OAuthHandler(cfg['consumer_key'], cfg['consumer_secret'])
+    auth.set_access_token(cfg['access_token'], cfg['access_token_secret'])
+    return tweepy.API(auth)
 
 
 def main():
-  # Fill in the values noted in previous step here
-  cfg = {
-    "consumer_key"        : "",
-    "consumer_secret"     : "",
-    "access_token"        : "",
-    "access_token_secret" : ""
+    cfg = {
+        "consumer_key": "",
+        "consumer_secret": "",
+        "access_token": "",
+        "access_token_secret": ""
     }
 
-  tweet_list = get_guardian_summary(1)
+    tweet_list = get_guardian_summary(1)
 
-  api = get_api(cfg)
-  tweet = tweet_list[0][0] + ' ' + ' #' + tweet_list[1] + ' #' + tweet_list[2] + ' #' + tweet_list[3]
-  status = api.update_status(status=tweet)
+    api = get_api(cfg)
+    tweet = tweet_list[0][0] + ' ' + ' #' + tweet_list[1] + ' #' + tweet_list[2] + ' #' + tweet_list[3]
+    status = api.update_status(status=tweet)
 
 
 if __name__ == "__main__":
-  main()
+    main()
