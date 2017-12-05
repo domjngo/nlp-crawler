@@ -67,31 +67,16 @@ def clean_text(text):
     return text
 
 
-# specify the url
-url = 'https://www.theguardian.com/commentisfree/2017/dec/04/panorama-syria-allegations-uk-aid-transparency-bbc'
-
-text = get_article(url)
-text = clean_text(text)
-
-summary = summarize(text, 1)
-
-print(summary)
-
-
 all_articles = get_all_articles('https://www.theguardian.com/uk')
-
-print(all_articles)
 
 all_articles_text = ''
 for link in all_articles:
     print(link)
-    if link != 'https://www.theguardian.com/sport/all':
-        article = get_article(link)
-        all_articles_text += article
+    article = get_article(link)
+    all_articles_text += article
 
 all_articles_text = clean_text(all_articles_text)
 
 articles_summary = summarize(all_articles_text, 3)
 
 print(articles_summary)
-
