@@ -1,11 +1,9 @@
 # import libraries
-import re
+import tweepy
 from urllib.request import urlopen
-from bs4 import BeautifulSoup, SoupStrainer
-import nltk
+from bs4 import BeautifulSoup
 from nltk.tokenize import word_tokenize, sent_tokenize
 from nltk.corpus import stopwords
-from nltk.collocations import *
 from nltk.probability import FreqDist
 from string import punctuation
 from heapq import nlargest
@@ -14,33 +12,43 @@ from collections import defaultdict
 print("Crawler 0.1")
 
 
-def get_all_articles(url):
+def get_all_article_urls(url, att, value):
     page = urlopen(url)
     soup = BeautifulSoup(page, 'html.parser')
     content = soup.find(class_='facia-page')
-    links = content.find_all('a')
+    links = content.find_all('a', {att: value})
+    url_list = []
     for link in links:
-        print(link.prettify())
+        url = link.get('href')
+        url_list.append(url)
+    return url_list
 
 
-def get_article(url):
+def get_article(url, element, att, value):
     page = urlopen(url)
     soup = BeautifulSoup(page, 'html.parser')
-    article = soup.find('div', attrs={'class': 'content__article-body'}).text
-    return article
+    article = soup.find(element, attrs={att: value})
+    if article:
+        return article.text
+    else:
+        return '. '
 
 
 def summarize(text, n):
     sentences = sent_tokenize(text)
+    sentences = list(set(sentences))
+    sentences = [x for x in sentences if len(x) < 110]
+
+    my_stopwords = ['would', 'said', 'one', 'new', 'also']
 
     assert n <= len(sentences)
     words = word_tokenize(text.lower())
-    _stopwords = set(stopwords.words('english')+list(punctuation))
+    _stopwords = set(stopwords.words('english') + list(punctuation) + my_stopwords)
 
     new_words = [word for word in words if word not in _stopwords]
     freq = FreqDist(new_words)
 
-    # top_3 = nlargest(3, freq, key=freq.get)
+    top_3 = nlargest(3, freq, key=freq.get)
 
     ranking = defaultdict(int)
 
@@ -50,45 +58,52 @@ def summarize(text, n):
                 ranking[i] += freq[w]
 
     sents_idx = nlargest(n, ranking, key=ranking.get)
-    return [sentences[j] for j in sorted(sents_idx)]
+    summary = [sentences[j] for j in sorted(sents_idx)]
+    return [summary, top_3[0], top_3[1], top_3[2]]
 
 
-# specify the url
-url = 'https://www.theguardian.com/commentisfree/2017/dec/04/panorama-syria-allegations-uk-aid-transparency-bbc'
-
-text = get_article(url).replace('\n', ' ').strip()
-text = text.replace('–', '')
-text = text.replace('’', '')
-text = text.replace('“', '')
-text = text.replace('”', '')
-text = text.replace('|', '')
-
-summary = summarize(text, 2)
-
-print(summary)
+def clean_text(text):
+    text = text.replace('\n', ' ').strip()
+    text = text.replace('–', '')
+    text = text.replace('’', '')
+    text = text.replace('“', '')
+    text = text.replace('”', '')
+    text = text.replace('|', '')
+    return text
 
 
-page = urlopen('https://www.theguardian.com')
-soup = BeautifulSoup(page, 'html.parser')
-content = soup.find(class_='facia-page')
-links = content.find_all('a')
-for link in links:
-    url = link.get('href')
-    print(url)
+def get_guardian_summary(n):
+    all_article_urls = get_all_article_urls('https://www.theguardian.com/uk', 'data-link-name', 'article')
+    all_articles_text = ''
+    for link in all_article_urls:
+        article = get_article(link, 'div', 'class', 'content__article-body')
+        print(link)
+        all_articles_text += article
+    all_articles_text = clean_text(all_articles_text)
+    articles_summary = summarize(all_articles_text, n)
+    return articles_summary
 
 
+def get_api(cfg):
+    auth = tweepy.OAuthHandler(cfg['consumer_key'], cfg['consumer_secret'])
+    auth.set_access_token(cfg['access_token'], cfg['access_token_secret'])
+    return tweepy.API(auth)
 
 
-# text = ' '.join(map(lambda p: p.text, soup.find_all('article')))
+def main():
+    cfg = {
+        "consumer_key": "",
+        "consumer_secret": "",
+        "access_token": "",
+        "access_token_secret": ""
+    }
 
-# article.encode('ascii', errors='replace').replace("?", " ")
+    tweet_list = get_guardian_summary(1)
 
-# print(article.get_text())
+    api = get_api(cfg)
+    tweet = tweet_list[0][0] + ' ' + ' #' + tweet_list[1] + ' #' + tweet_list[2] + ' #' + tweet_list[3]
+    status = api.update_status(status=tweet)
 
-# text = "Hello, my name is Nick. I like pineapple. I also like apples."
 
-# words = [word_tokenize(sent) for sent in sents]
-
-# bigram_measures = nltk.collocations.BigramAssocMeasures()
-# finder = BigramCollocationFinder.from_words(wordsWOStopWords)
-# print(sorted(finder.ngram_fd.items()))
+if __name__ == "__main__":
+    main()
