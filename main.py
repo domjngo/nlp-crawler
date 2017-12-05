@@ -1,11 +1,8 @@
 # import libraries
-import re
 from urllib.request import urlopen
-from bs4 import BeautifulSoup, SoupStrainer
-import nltk
+from bs4 import BeautifulSoup
 from nltk.tokenize import word_tokenize, sent_tokenize
 from nltk.corpus import stopwords
-from nltk.collocations import *
 from nltk.probability import FreqDist
 from string import punctuation
 from heapq import nlargest
@@ -18,9 +15,12 @@ def get_all_articles(url):
     page = urlopen(url)
     soup = BeautifulSoup(page, 'html.parser')
     content = soup.find(class_='facia-page')
-    links = content.find_all('a')
+    links = content.find_all('a', {'data-link-name': 'article'})
+    url_list = []
     for link in links:
-        print(link.prettify())
+        url = link.get('href')
+        url_list.append(url)
+    return url_list
 
 
 def get_article(url):
@@ -68,27 +68,7 @@ summary = summarize(text, 2)
 print(summary)
 
 
-page = urlopen('https://www.theguardian.com')
-soup = BeautifulSoup(page, 'html.parser')
-content = soup.find(class_='facia-page')
-links = content.find_all('a')
-for link in links:
-    url = link.get('href')
-    print(url)
+all_articles = get_all_articles('https://www.theguardian.com')
 
+print(all_articles)
 
-
-
-# text = ' '.join(map(lambda p: p.text, soup.find_all('article')))
-
-# article.encode('ascii', errors='replace').replace("?", " ")
-
-# print(article.get_text())
-
-# text = "Hello, my name is Nick. I like pineapple. I also like apples."
-
-# words = [word_tokenize(sent) for sent in sents]
-
-# bigram_measures = nltk.collocations.BigramAssocMeasures()
-# finder = BigramCollocationFinder.from_words(wordsWOStopWords)
-# print(sorted(finder.ngram_fd.items()))
