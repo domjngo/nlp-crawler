@@ -11,11 +11,11 @@ from collections import defaultdict
 print("Crawler 0.1")
 
 
-def get_all_articles(url):
+def get_all_article_urls(url, att, value):
     page = urlopen(url)
     soup = BeautifulSoup(page, 'html.parser')
     content = soup.find(class_='facia-page')
-    links = content.find_all('a', {'data-link-name': 'article'})
+    links = content.find_all('a', {att: value})
     url_list = []
     for link in links:
         url = link.get('href')
@@ -23,10 +23,10 @@ def get_all_articles(url):
     return url_list
 
 
-def get_article(url):
+def get_article(url, element, att, value):
     page = urlopen(url)
     soup = BeautifulSoup(page, 'html.parser')
-    article = soup.find('div', attrs={'class': 'content__article-body'})
+    article = soup.find(element, attrs={att: value})
     if article:
         return article.text
     else:
@@ -36,15 +36,18 @@ def get_article(url):
 def summarize(text, n):
     sentences = sent_tokenize(text)
     sentences = list(set(sentences))
+    sentences = [x for x in sentences if len(x) < 110]
+
+    my_stopwords = ['would', 'said', 'one', 'new', 'also']
 
     assert n <= len(sentences)
     words = word_tokenize(text.lower())
-    _stopwords = set(stopwords.words('english')+list(punctuation))
+    _stopwords = set(stopwords.words('english')+list(punctuation)+my_stopwords)
 
     new_words = [word for word in words if word not in _stopwords]
     freq = FreqDist(new_words)
 
-    # top_3 = nlargest(3, freq, key=freq.get)
+    top_3 = nlargest(3, freq, key=freq.get)
 
     ranking = defaultdict(int)
 
@@ -54,7 +57,8 @@ def summarize(text, n):
                 ranking[i] += freq[w]
 
     sents_idx = nlargest(n, ranking, key=ranking.get)
-    return [sentences[j] for j in sorted(sents_idx)]
+    summary = [sentences[j] for j in sorted(sents_idx)]
+    return [summary, top_3[0], top_3[1], top_3[2]]
 
 
 def clean_text(text):
@@ -67,16 +71,16 @@ def clean_text(text):
     return text
 
 
-all_articles = get_all_articles('https://www.theguardian.com/uk')
+def get_guardian_summary(n):
+    all_article_urls = get_all_article_urls('https://www.theguardian.com/uk', 'data-link-name', 'article')
+    all_articles_text = ''
+    for link in all_article_urls:
+        article = get_article(link, 'div', 'class', 'content__article-body')
+        print(link)
+        all_articles_text += article
+    all_articles_text = clean_text(all_articles_text)
+    articles_summary = summarize(all_articles_text, n)
+    return articles_summary
 
-all_articles_text = ''
-for link in all_articles:
-    print(link)
-    article = get_article(link)
-    all_articles_text += article
 
-all_articles_text = clean_text(all_articles_text)
-
-articles_summary = summarize(all_articles_text, 3)
-
-print(articles_summary)
+print(get_guardian_summary(1))
