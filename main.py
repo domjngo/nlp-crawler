@@ -53,15 +53,21 @@ def summarize(text, n):
     return [sentences[j] for j in sorted(sents_idx)]
 
 
+def clean_text(text):
+    text = text.replace('\n', ' ').strip()
+    text = text.replace('–', '')
+    text = text.replace('’', '')
+    text = text.replace('“', '')
+    text = text.replace('”', '')
+    text = text.replace('|', '')
+    return text
+
+
 # specify the url
 url = 'https://www.theguardian.com/commentisfree/2017/dec/04/panorama-syria-allegations-uk-aid-transparency-bbc'
 
-text = get_article(url).replace('\n', ' ').strip()
-text = text.replace('–', '')
-text = text.replace('’', '')
-text = text.replace('“', '')
-text = text.replace('”', '')
-text = text.replace('|', '')
+text = get_article(url)
+text = clean_text(text)
 
 summary = summarize(text, 2)
 
