@@ -41,7 +41,7 @@ def summarize(text, n):
     sentences = list(set(sentences))
     sentences = [x for x in sentences if len(x) < 110]
 
-    my_stopwords = ['would', 'said', 'one', 'new', 'also', 'read', 'time', 'people', 'says', 'like']
+    my_stopwords = ['would', 'said', 'one', 'new', 'also', 'read', 'time', 'people', 'says', 'like', 'us', 'years']
 
     assert n <= len(sentences)
     words = word_tokenize(text.lower())
