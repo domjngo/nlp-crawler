@@ -93,12 +93,7 @@ def get_api(cfg):
 
 
 def main():
-    cfg = {
-        "consumer_key": "",
-        "consumer_secret": "",
-        "access_token": "",
-        "access_token_secret": ""
-    }
+    cfg = keys.cfg_keys()
 
     tweet_list = get_guardian_summary(1)
 
