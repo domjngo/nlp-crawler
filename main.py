@@ -1,4 +1,5 @@
 # import libraries
+import keys
 import tweepy
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
@@ -39,7 +40,7 @@ def summarize(text, n):
     sentences = list(set(sentences))
     sentences = [x for x in sentences if len(x) < 110]
 
-    my_stopwords = ['would', 'said', 'one', 'new', 'also']
+    my_stopwords = ['would', 'said', 'one', 'new', 'also', 'read', 'time']
 
     assert n <= len(sentences)
     words = word_tokenize(text.lower())
@@ -73,7 +74,7 @@ def clean_text(text):
 
 
 def get_guardian_summary(n):
-    all_article_urls = get_all_article_urls('https://www.theguardian.com/uk', 'data-link-name', 'article')
+    all_article_urls = get_all_article_urls('https://www.theguardian.com/uk/', 'data-link-name', 'article')
     all_articles_text = ''
     for link in all_article_urls:
         article = get_article(link, 'div', 'class', 'content__article-body')
@@ -84,6 +85,7 @@ def get_guardian_summary(n):
     return articles_summary
 
 
+# http://nodotcom.org/python-twitter-tutorial.html
 def get_api(cfg):
     auth = tweepy.OAuthHandler(cfg['consumer_key'], cfg['consumer_secret'])
     auth.set_access_token(cfg['access_token'], cfg['access_token_secret'])
