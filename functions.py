@@ -1,4 +1,5 @@
 # import libraries
+import re
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 from nltk.tokenize import word_tokenize, sent_tokenize
@@ -26,7 +27,11 @@ def get_article(url, element, att, value):
     soup = BeautifulSoup(page, 'html.parser')
     article = soup.find(element, attrs={att: value})
     if article:
-        return article.text
+        for div in article.find_all('div', {'class': 'block-share'}):
+            div.decompose()
+        article = article.text
+        article = clean_text(article)
+        return article
     else:
         return '. '
 
@@ -36,7 +41,7 @@ def summarize(text, n):
     sentences = list(set(sentences))
     sentences = [x for x in sentences if len(x) < 110]
 
-    my_stopwords = ['would', 'said', 'one', 'new', 'also', 'read', 'time', 'people', 'says']
+    my_stopwords = ['would', 'said', 'one', 'new', 'also', 'read', 'time', 'people', 'says', 'like']
 
     assert n <= len(sentences)
     words = word_tokenize(text.lower())
@@ -60,7 +65,7 @@ def summarize(text, n):
 
 
 def clean_text(text):
-    text = text.replace('\n', ' ').strip()
+    text = re.sub('\s+', ' ', text).strip()
     text = text.replace('–', '')
     text = text.replace('’', '')
     text = text.replace('“', '')
