@@ -27,13 +27,10 @@ def get_article(url, element, att, value):
     soup = BeautifulSoup(page, 'html.parser')
     article = soup.find(element, attrs={att: value})
     if article:
-        for div in article.find_all('div', {'class': 'block-share'}):
-            div.decompose()
-        article = article.text
         article = clean_text(article)
         return article
     else:
-        return '. '
+        return ' '
 
 
 def summarize(text, n):
@@ -65,6 +62,9 @@ def summarize(text, n):
 
 
 def clean_text(text):
+    for div in text.find_all('div', {'class': 'block-share'}):
+        div.decompose()
+    text = text.text
     text = re.sub('\s+', ' ', text).strip()
     text = text.replace('–', '')
     text = text.replace('’', '')
