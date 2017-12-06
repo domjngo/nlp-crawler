@@ -40,7 +40,7 @@ def summarize(text, n):
     sentences = list(set(sentences))
     sentences = [x for x in sentences if len(x) < 110]
 
-    my_stopwords = ['would', 'said', 'one', 'new', 'also', 'read', 'time']
+    my_stopwords = ['would', 'said', 'one', 'new', 'also', 'read', 'time', 'people', 'says']
 
     assert n <= len(sentences)
     words = word_tokenize(text.lower())
@@ -74,7 +74,8 @@ def clean_text(text):
 
 
 def get_guardian_summary(n):
-    all_article_urls = get_all_article_urls('https://www.theguardian.com/uk/', 'data-link-name', 'article')
+    all_article_urls = get_all_article_urls('https://www.theguardian.com/uk/environment', 'data-link-name', 'article')
+    all_article_urls = list(set(all_article_urls))
     all_articles_text = ''
     for link in all_article_urls:
         article = get_article(link, 'div', 'class', 'content__article-body')
