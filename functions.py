@@ -45,7 +45,7 @@ def summarize(text, n):
         'new',
         'also',
         'read',
-        'time', 
+        'time',
         'people',
         'says',
         'like',
@@ -74,14 +74,14 @@ def summarize(text, n):
     return [summary, top_3[0], top_3[1], top_3[2]]
 
 
-def clean_text(text):
-    for div in text.find_all('div', {'class': 'block-share'}):
+def clean_text(article):
+    for div in article.find_all('div', {'class': 'block-share'}):
         div.decompose()
-    text = text.text
-    text = re.sub('\s+', ' ', text).strip()
-    text = text.replace('–', '')
-    text = text.replace('’', '')
-    text = text.replace('“', '')
-    text = text.replace('”', '')
-    text = text.replace('|', '')
-    return text
+    article = article.text
+    article = re.sub('\s+', ' ', article).strip()
+    article = article.replace('–', '')
+    article = article.replace('’', '')
+    article = article.replace('“', '')
+    article = article.replace('”', '')
+    article = article.replace('|', '')
+    return article
