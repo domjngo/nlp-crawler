@@ -27,48 +27,66 @@ def get_article(url, element, att, value):
     soup = BeautifulSoup(page, 'html.parser')
     article = soup.find(element, attrs={att: value})
     if article:
-        for div in article.find_all('div', {'class': 'block-share'}):
-            div.decompose()
-        article = article.text
         article = clean_text(article)
-        return article
+        return article + ' '
     else:
-        return '. '
+        return ''
 
 
-def summarize(text, n):
+def summarize(text, n, training=False, count=110):
     sentences = sent_tokenize(text)
     sentences = list(set(sentences))
-    sentences = [x for x in sentences if len(x) < 110]
+    sentences = [x for x in sentences if len(x) < count]
 
-    my_stopwords = ['would', 'said', 'one', 'new', 'also', 'read', 'time', 'people', 'says', 'like', 'us', 'years']
+    my_stopwords = [
+        'would',
+        'said',
+        'one',
+        'new',
+        'also',
+        'read',
+        'time',
+        'people',
+        'says',
+        'like',
+        'us',
+        'years'
+    ]
 
-    assert n <= len(sentences)
-    words = word_tokenize(text.lower())
-    _stopwords = set(stopwords.words('english') + list(punctuation) + my_stopwords)
+    if n <= len(sentences):
+        words = word_tokenize(text.lower())
+        _stopwords = set(stopwords.words('english') + list(punctuation) + my_stopwords)
 
-    new_words = [word for word in words if word not in _stopwords]
-    freq = FreqDist(new_words)
+        new_words = [word for word in words if word not in _stopwords]
+        freq = FreqDist(new_words)
 
-    top_3 = nlargest(3, freq, key=freq.get)
+        top_3 = nlargest(3, freq, key=freq.get)
 
-    ranking = defaultdict(int)
+        ranking = defaultdict(int)
 
-    for i, sent in enumerate(sentences):
-        for w in word_tokenize(sent.lower()):
-            if w in freq:
-                ranking[i] += freq[w]
+        for i, sent in enumerate(sentences):
+            for w in word_tokenize(sent.lower()):
+                if w in freq:
+                    ranking[i] += freq[w]
 
-    sents_idx = nlargest(n, ranking, key=ranking.get)
-    summary = [sentences[j] for j in sorted(sents_idx)]
-    return [summary, top_3[0], top_3[1], top_3[2]]
+        sents_idx = nlargest(n, ranking, key=ranking.get)
+        summary = [sentences[j] for j in sorted(sents_idx)]
+        if training:
+            return summary
+        else:
+            return [summary, top_3[0], top_3[1], top_3[2]]
+    else:
+        return ''
 
 
-def clean_text(text):
-    text = re.sub('\s+', ' ', text).strip()
-    text = text.replace('–', '')
-    text = text.replace('’', '')
-    text = text.replace('“', '')
-    text = text.replace('”', '')
-    text = text.replace('|', '')
-    return text
+def clean_text(article):
+    for div in article.find_all('div', {'class': 'block-share'}):
+        div.decompose()
+    article = article.text
+    article = re.sub('\s+', ' ', article).strip()
+    article = article.replace('–', '')
+    article = article.replace('’', '')
+    article = article.replace('“', '')
+    article = article.replace('”', '')
+    article = article.replace('|', '')
+    return article
