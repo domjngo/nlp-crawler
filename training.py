@@ -18,3 +18,5 @@ def get_guardian_comments_summary(n):
             comment_summaries.append(comment)
     return comment_summaries
 
+
+print(get_guardian_comments_summary(1))

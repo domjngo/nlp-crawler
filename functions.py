@@ -33,28 +33,27 @@ def get_article(url, element, att, value):
         return ''
 
 
-def summarize(text, n, training=False):
-    if len(text) > 110:
-        sentences = sent_tokenize(text)
-        sentences = list(set(sentences))
-        sentences = [x for x in sentences if len(x) < 110]
+def summarize(text, n, training=False, count=110):
+    sentences = sent_tokenize(text)
+    sentences = list(set(sentences))
+    sentences = [x for x in sentences if len(x) < count]
 
-        my_stopwords = [
-            'would',
-            'said',
-            'one',
-            'new',
-            'also',
-            'read',
-            'time',
-            'people',
-            'says',
-            'like',
-            'us',
-            'years'
-        ]
+    my_stopwords = [
+        'would',
+        'said',
+        'one',
+        'new',
+        'also',
+        'read',
+        'time',
+        'people',
+        'says',
+        'like',
+        'us',
+        'years'
+    ]
 
-        assert n <= len(sentences)
+    if n <= len(sentences):
         words = word_tokenize(text.lower())
         _stopwords = set(stopwords.words('english') + list(punctuation) + my_stopwords)
 
