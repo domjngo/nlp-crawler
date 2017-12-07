@@ -1,3 +1,4 @@
+# import libraries
 import nltk
 
 data = [
@@ -54,9 +55,12 @@ data = [
 def create_training_data():
     tweets = []
     for (words, sentiment) in data:
-        words_filtered = [e.lower() for e in words.split() if len(e) >= 3]
+        words_filtered = [e.lower() for e in words.split() if len(e) >= 4]
         tweets.append((words_filtered, sentiment))
-    print(tweets)
+    return tweets
+
+
+print(create_training_data())
 
 
 training_data = [
