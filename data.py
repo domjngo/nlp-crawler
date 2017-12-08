@@ -195,6 +195,129 @@ training_data = [
     (['last', 'years', 'extraordinary', 'time', 'service', 'poland', 'poles', 'honour,', 'szydło', 'twitter'], 'positive')
 ]
 
+training_neg_data = [
+    (['spending', 'watchdog', 'project', 'risky', 'expensive'], 'negative'),
+    (['london', 'smogs', 'possible', 'pollution', 'smell'], 'negative'),
+    (['sense', 'disbelief', 'close,', 'clumsy', 'intruder', 'wild', 'tangle', 'trees'], 'negative'),
+    (['chung', 'traffic', 'pollution', 'younger', 'people', 'shopping', 'heart', 'city'], 'negative'),
+    (['food', 'sustainability', 'highlighted', 'challenge', 'facing', 'brexit', 'approached'], 'negative'),
+    (['north', 'alaska', 'industry', 'suck', 'life'], 'negative'),
+    (['report', 'biggest', 'uncertainty', 'future', 'climate', 'change'], 'negative'),
+    (['society', 'afford', 'ignore', 'pollution'], 'negative'),
+    (['polar', 'bears', 'hunt', 'seals,', 'global', 'warming', 'threatens', 'species'], 'negative'),
+    (['society', 'afford', 'ignore', 'pollution'], 'negative'),
+    (['brexit', 'makes', 'headlines', 'fail,'], 'negative'),
+    (['popularity', 'term', 'populism', 'nativism', 'radical', 'right'], 'negative'),
+    (['2016,', 'david', 'camerons', 'austerity', 'agenda', 'child', 'poverty', 'rates'], 'negative'),
+    (['leader', 'damaged', 'relations', 'irish', 'government'], 'neutral'),
+    (['risk', 'tories', 'versus', 'police', 'domino', 'effect', 'cabinet'], 'negative'),
+    (['britains', 'exit', 'northern', 'ireland', 'risks', 'hard', 'policed', 'border'], 'negative'),
+    (['rather', 'stay', 'union,', 'british'], 'negative'),
+    (['tories', 'economic', 'strategy', 'failed', 'stated', 'terms'], 'negative'),
+    (['adonis', 'criticised', 'johnson', 'twitter', 'failing', 'speak', 'against', 'high', 'packets'], 'negative'),
+    (['health', 'safety', 'executives', 'myth-busting', 'website', 'rebut', 'nonsense'], 'negative'),
+    (['defence', 'secretary', 'daily', 'mail', 'dead', 'terrorist', 'harm', 'britain'], 'negative'),
+    (['meeting', 'discuss', 'scheduled', 'may,', 'attack', 'manchester', 'arena', 'may'], 'negative'),
+    (['americans', 'support', 'plan,', 'republican', 'voters'], 'negative'),
+    (['polar', 'bears', 'rely', 'hunt', 'seals', 'global', 'warming', 'threatens', 'species'], 'negative'),
+    (['action', 'figures', 'show', '2041,', 'lost', 'person', 'congestion'], 'negative'),
+    (['timber', 'planks', 'illegal', 'logging', 'site', 'discovered', 'palawan', 'network', 'tourist', 'town', 'nido'], 'negative'),
+    (['kokonuko', 'blame', 'police,', 'wanted', 'silence', 'community', 'scare', 'away', 'land'], 'negative'),
+    (['government', 'defended', 'britains', 'nuclear', 'power', 'face', 'falling', 'renewable', 'costs'], 'negative'),
+    (['2016,', 'china', 'imported', 'waste', 'plastics', 'developed', 'countries', 'japan'], 'negative'),
+    (['fire', 'north', 'diego', 'highway', 'strong', 'winds'], 'negative'),
+    (['security', 'issues', 'affecting', 'apples', 'software', 'iphone', 'computers'], 'negative'),
+    (['eighteen', 'bluster,', 'brexit', 'red,', 'white', 'blue', 'deal', 'better', 'deal'], 'negative'),
+    (['investigators', 'camorra', 'bosses', 'forced', 'bars', 'coffee', 'brand', 'owned', 'feared', 'dalterio', 'family'], 'negative'),
+    (['increasingly', 'felt', 'less', 'welcome', 'martin', 'seeleib-kaiser,', 'german', 'returned', '2017'], 'negative'),
+    (['admitted', 'finding', 'weird', 'again', 'three', 'last', 'year', 'despite', 'winning', 'double', 'gold', '2016', 'olympics'], 'negative'),
+    (['locked', 'significant', 'periods', 'day', 'often', 'long', 'hours,', 'report'], 'negative'),
+    (['hmrc', 'levy', 'biggest', 'fine', 'sports', 'direct', 'amount', 'double', 'wages', 'owed'], 'negative'),
+    (['hate', 'crimes', 'against', 'lgbt', 'people', 'russia', 'doubled', 'five', 'years,', 'according', 'research'], 'negative'),
+    (['recently', 'started', 'primary', 'school', 'mother', 'going', 'die'], 'negative'),
+    (['home', 'tomorrow', 'sleep,', 'neighbour,', 'migrant', 'anhui', 'named'], 'negative'),
+    (['paradise', 'panama', 'papers', 'super-rich', 'powerful', 'trusted', 'regulate', 'themselves', 'corbyn'], 'negative'),
+    (['hart', 'badly', 'failed', 'service', 'meant', 'caring', 'august', '2012,', 'kirkup', 'found'], 'negative')
+]
+
+training_pos_data = [
+    (['unveiled', 'trains', 'october,', 'hanging', 'bike', 'storage', 'spaces', 'carriage'], 'positive'),
+    (['australian', 'banks', 'ruled', 'financing', 'mine'], 'positive'),
+    (['fusion', 'power', 'technological', 'goals', 'pursuit', 'clean', 'energy'], 'positive'),
+    (['arguing', 'switch', 'electric', 'transport', 'drive', 'future', 'demand'], 'positive'),
+    (['winter', 'riding', 'rural', 'modern', 'lights', 'make', 'much', 'easier'], 'positive'),
+    (['2015', 'paris', 'recognised', 'contribution', 'indigenous', 'knowledge', 'climate', 'change'], 'positive'),
+    (['facebook', 'clean', 'helps', 'environment'], 'positive'),
+    (['experience', 'employing', 'disabled', 'people', 'brilliant', 'employees'], 'positive'),
+    (['london', 'foreign', 'workers', 'keep', 'growing', 'boosting', 'export'], 'positive'),
+    (['progress', 'deal', 'avoid', 'hard', 'border', 'island', 'ireland'], 'positive'),
+    (['discuss', 'house', 'officials', 'necessary', 'repay', 'previous', 'travel', 'claims'], 'positive'),
+    (['coal', '2025,', 'coal-fired', 'electricity', 'since', '2012'], 'positive'),
+    (['saving', 'vaquita', 'mexican', 'government,', 'illegal', 'fishing', 'totoaba'], 'positive'),
+    (['indigenous', 'crops', 'gaining', 'recognition', 'african', 'farming', 'context'], 'positive'),
+    (['using', 'wingtags', 'android', 'ios,', 'turkey', 'fans', 'report', 'sightings', 'tagged', 'birds,', 'help'], 'positive'),
+    (['national', 'forest,', 'everitt', 'promote', 'tree', 'planting'], 'positive'),
+    (['measure', 'climate', 'change', 'heat', 'absorbed', 'oceans,', 'melting', 'ice,', 'level', 'rise'], 'positive'),
+    (['2015', 'paris', 'accord', 'recognised', 'contribution', 'indigenous', 'knowledge', 'dealing', 'climate', 'change'], 'positive'),
+    (['winter,', 'riding', 'sedately', 'office', 'clothes', 'easier', 'juggling', 'winter', 'garments'], 'positive'),
+    (['office', 'christmas', 'party', 'year,', 'feeling', 'pretty', 'happy'], 'positive'),
+    (['eu', 'citizens', 'right', 'stay'], 'positive'),
+    (['firefighters', 'spent', 'hour', 'youtube', 'prankster', 'cemented', 'head', 'microwave', 'oven'], 'positive'),
+    (['water', 'river', 'normally', 'generates', 'total', 'megawatts', 'electricity,', 'supply'], 'positive'),
+    (['last', 'years', 'extraordinary', 'time', 'service', 'poland', 'poles', 'honour,', 'szydło', 'twitter'], 'positive')
+]
+
+training_bal_data = [
+    (['unveiled', 'trains', 'october,', 'hanging', 'bike', 'storage', 'spaces', 'carriage'], 'positive'),
+    (['australian', 'banks', 'ruled', 'financing', 'mine'], 'positive'),
+    (['fusion', 'power', 'technological', 'goals', 'pursuit', 'clean', 'energy'], 'positive'),
+    (['arguing', 'switch', 'electric', 'transport', 'drive', 'future', 'demand'], 'positive'),
+    (['winter', 'riding', 'rural', 'modern', 'lights', 'make', 'much', 'easier'], 'positive'),
+    (['2015', 'paris', 'recognised', 'contribution', 'indigenous', 'knowledge', 'climate', 'change'], 'positive'),
+    (['facebook', 'clean', 'helps', 'environment'], 'positive'),
+    (['experience', 'employing', 'disabled', 'people', 'brilliant', 'employees'], 'positive'),
+    (['london', 'foreign', 'workers', 'keep', 'growing', 'boosting', 'export'], 'positive'),
+    (['progress', 'deal', 'avoid', 'hard', 'border', 'island', 'ireland'], 'positive'),
+    (['discuss', 'house', 'officials', 'necessary', 'repay', 'previous', 'travel', 'claims'], 'positive'),
+    (['coal', '2025,', 'coal-fired', 'electricity', 'since', '2012'], 'positive'),
+    (['saving', 'vaquita', 'mexican', 'government,', 'illegal', 'fishing', 'totoaba'], 'positive'),
+    (['indigenous', 'crops', 'gaining', 'recognition', 'african', 'farming', 'context'], 'positive'),
+    (['using', 'wingtags', 'android', 'ios,', 'turkey', 'fans', 'report', 'sightings', 'tagged', 'birds,', 'help'], 'positive'),
+    (['national', 'forest,', 'everitt', 'promote', 'tree', 'planting'], 'positive'),
+    (['measure', 'climate', 'change', 'heat', 'absorbed', 'oceans,', 'melting', 'ice,', 'level', 'rise'], 'positive'),
+    (['2015', 'paris', 'accord', 'recognised', 'contribution', 'indigenous', 'knowledge', 'dealing', 'climate', 'change'], 'positive'),
+    (['winter,', 'riding', 'sedately', 'office', 'clothes', 'easier', 'juggling', 'winter', 'garments'], 'positive'),
+    (['office', 'christmas', 'party', 'year,', 'feeling', 'pretty', 'happy'], 'positive'),
+    (['eu', 'citizens', 'right', 'stay'], 'positive'),
+    (['firefighters', 'spent', 'hour', 'youtube', 'prankster', 'cemented', 'head', 'microwave', 'oven'], 'positive'),
+    (['water', 'river', 'normally', 'generates', 'total', 'megawatts', 'electricity,', 'supply'], 'positive'),
+    (['last', 'years', 'extraordinary', 'time', 'service', 'poland', 'poles', 'honour,', 'szydło', 'twitter'], 'positive'),
+    (['spending', 'watchdog', 'project', 'risky', 'expensive'], 'negative'),
+    (['london', 'smogs', 'possible', 'pollution', 'smell'], 'negative'),
+    (['north', 'alaska', 'industry', 'suck', 'life'], 'negative'),
+    (['report', 'biggest', 'uncertainty', 'future', 'climate', 'change'], 'negative'),
+    (['society', 'afford', 'ignore', 'pollution'], 'negative'),
+    (['brexit', 'makes', 'headlines', 'fail,'], 'negative'),
+    (['popularity', 'term', 'populism', 'nativism', 'radical', 'right'], 'negative'),
+    (['2016,', 'david', 'camerons', 'austerity', 'agenda', 'child', 'poverty', 'rates'], 'negative'),
+    (['britains', 'exit', 'northern', 'ireland', 'risks', 'hard', 'policed', 'border'], 'negative'),
+    (['tories', 'economic', 'strategy', 'failed', 'stated', 'terms'], 'negative'),
+    (['adonis', 'criticised', 'johnson', 'twitter', 'failing', 'speak', 'against', 'high', 'packets'], 'negative'),
+    (['health', 'safety', 'executives', 'myth-busting', 'website', 'rebut', 'nonsense'], 'negative'),
+    (['defence', 'secretary', 'daily', 'mail', 'dead', 'terrorist', 'harm', 'britain'], 'negative'),
+    (['meeting', 'discuss', 'scheduled', 'may,', 'attack', 'manchester', 'arena', 'may'], 'negative'),
+    (['americans', 'support', 'plan,', 'republican', 'voters'], 'negative'),
+    (['polar', 'bears', 'rely', 'hunt', 'seals', 'global', 'warming', 'threatens', 'species'], 'negative'),
+    (['timber', 'planks', 'illegal', 'logging', 'site', 'discovered', 'palawan', 'network', 'tourist', 'town', 'nido'], 'negative'),
+    (['government', 'defended', 'britain', 'nuclear', 'power', 'face', 'falling', 'renewable', 'costs'], 'negative'),
+    (['fire', 'north', 'diego', 'highway', 'strong', 'winds'], 'negative'),
+    (['security', 'issues', 'affecting', 'apples', 'software', 'iphone', 'computers'], 'negative'),
+    (['hmrc', 'levy', 'biggest', 'fine', 'sports', 'direct', 'amount', 'double', 'wages', 'owed'], 'negative'),
+    (['hate', 'crimes', 'against', 'lgbt', 'people', 'russia', 'doubled', 'five', 'years,', 'according', 'research'], 'negative'),
+    (['recently', 'started', 'primary', 'school', 'mother', 'going', 'die'], 'negative'),
+    (['paradise', 'panama', 'papers', 'super-rich', 'powerful', 'trusted', 'regulate', 'themselves', 'corbyn'], 'negative')
+]
+
 test_data = [
     (['defendant', 'leadership', 'role', 'within', 'federal', 'officials', 'said'], 'neutral'),
     (['uks', 'spending', 'watchdog', 'called', 'project', 'risky', 'expensive'], 'negative'),
@@ -226,11 +349,11 @@ def extract_features(document):
     return features
 
 
-word_features = get_word_features(get_words_in_tweets(training_data))
+word_features = get_word_features(get_words_in_tweets(training_bal_data))
 
-training_set = nltk.classify.apply_features(extract_features, training_data)
+training_set = nltk.classify.apply_features(extract_features, training_bal_data)
 
 classifier = nltk.NaiveBayesClassifier.train(training_set)
 
-tweet = 'There is recognition'
-print(classifier.classify(extract_features(tweet.split())))
+tweet = 'Sturgeon said her ministers would continue to argue that case at the next meeting of the joint ministerial committee in London next week'
+# print(classifier.classify(extract_features(tweet.split())))

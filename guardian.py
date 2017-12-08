@@ -9,7 +9,7 @@ def guardian_urls():
         'https://www.theguardian.com/politics',
         'https://www.theguardian.com/music'
     ]
-    return urls[0]
+    return urls[2]
 
 
 def get_guardian_summary(n):
