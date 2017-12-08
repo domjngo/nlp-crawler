@@ -10,8 +10,7 @@ def guardian_urls():
         'https://www.theguardian.com/politics',
         'https://www.theguardian.com/music'
     ]
-    i = randint(0, 3)
-    return urls[2]
+    return urls[1]
 
 
 def get_guardian_summary(n):

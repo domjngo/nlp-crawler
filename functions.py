@@ -49,8 +49,26 @@ def summarize(text, n, training=False, count=110):
         'people',
         'says',
         'like',
+        'share',
         'us',
-        'years'
+        'years',
+        'within',
+        'with',
+        'called',
+        'asked',
+        'about',
+        'each',
+        'mine',
+        'back',
+        'way',
+        'always',
+        'still',
+        'groups',
+        'put',
+        'week',
+        'get',
+        'yet',
+        'could'
     ]
 
     if n <= len(sentences):
@@ -90,3 +108,4 @@ def clean_text(article):
     article = article.replace('”', '')
     article = article.replace('|', '')
     return article
+

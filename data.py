@@ -61,9 +61,6 @@ def create_training_data():
     return tweets
 
 
-print(create_training_data())
-
-
 training_data = [
     (['big', 'four', 'australian', 'banks', 'ruled', 'out', 'financing'], 'positive'),
     (['fusion', 'power', 'most', 'sought-after', 'technological', 'goals', 'pursuit', 'clean', 'energy'], 'positive'),
@@ -145,5 +142,5 @@ training_set = nltk.classify.apply_features(extract_features, training_data)
 
 classifier = nltk.NaiveBayesClassifier.train(training_set)
 
-tweet = 'There are many young people among the Matsés, but the majority dont want to know.'
-print(classifier.classify(extract_features(tweet.split())))
+tweet = 'The UKs spending watchdog has called the project risky and expensive.'
+# print(classifier.classify(extract_features(tweet.split())))
