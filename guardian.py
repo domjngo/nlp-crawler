@@ -1,5 +1,4 @@
 # import libraries
-from random import randint
 import functions
 
 
@@ -8,9 +7,11 @@ def guardian_urls():
         'https://www.theguardian.com/uk',
         'https://www.theguardian.com/uk/environment',
         'https://www.theguardian.com/politics',
-        'https://www.theguardian.com/music'
+        'https://www.theguardian.com/music',
+        'https://www.theguardian.com/lifeandstyle/health-and-wellbeing',
+        'https://www.theguardian.com/artanddesign'
     ]
-    return urls[1]
+    return urls[4]
 
 
 def get_guardian_summary(n):

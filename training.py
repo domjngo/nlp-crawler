@@ -13,7 +13,7 @@ def get_guardian_comments_summary(n):
         article = functions.get_article(link, 'div', 'class', 'content__article-body')
         if article:
             print(link)
-            comment = functions.summarize(article, n, True)
+            comment = functions.summarize(article, n, True, 140)
             print(comment)
             comment_summaries.append(comment)
     return comment_summaries
