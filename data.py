@@ -355,5 +355,5 @@ training_set = nltk.classify.apply_features(extract_features, training_bal_data)
 
 classifier = nltk.NaiveBayesClassifier.train(training_set)
 
-tweet = 'Sturgeon said her ministers would continue to argue that case at the next meeting of the joint ministerial committee in London next week'
+tweet = 'Marks & Spencer has begun selling a stoneless avocado that could help banish the pain of avocado hand'
 # print(classifier.classify(extract_features(tweet.split())))
