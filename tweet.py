@@ -30,3 +30,37 @@ def main():
     api = get_api(cfg)
     tweet = tweet_list[0][0] + ' ' + icon + ' ' + ' #' + tweet_list[1] + ' #' + tweet_list[2] + ' #' + tweet_list[3]
     status = api.update_status(status=tweet)
+
+    
+def send_tweet(tweet):
+    cfg = keys.cfg_keys()
+    api = get_api(cfg)
+    success = False
+    try:
+        print(tweet)
+        status = api.update_status(status=tweet)
+        success = True
+        print(" => Successfully tweeted:")
+    except:
+        print(" => Tweet failed")
+        pass
+    return success
+
+
+def search_twitter(search):
+    cfg = keys.cfg_keys()
+    api = get_api(cfg)
+    results = [status for status in tweepy.
+                     Cursor(api.search, q=search).items(100)]
+    return results
+
+
+def reply_tweet(results):
+    cfg = keys.cfg_keys()
+    api = get_api(cfg)
+    selected_tweet = results[0]
+    tweet = ("@{} This is a demo search for 'hello world' with a bot, hello"
+             " world! #{}".format(selected_tweet.user.screen_name))
+    tweet_id = selected_tweet.id
+    api.update_status(tweet, tweet_id)
+    
