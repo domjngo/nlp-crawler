@@ -78,6 +78,7 @@ def reply(search='@starlord_p'):
             text = text.replace('@starlord_p ', '')
             phrase = Chat(pairs.eliza(), reflections).respond(text)
             api.update_status("@" + username + " " + phrase, in_reply_to_status_id=tweetId)
+            print(tweet)
             print("Tweet : " + text)
             print("Replied with : " + phrase)
         except tweepy.TweepError as e:
